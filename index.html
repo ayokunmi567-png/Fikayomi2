@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Fikayomi</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    background:#0e0e0e;
+    color:#f5f5f5;
+    font-family:'Poppins', sans-serif;
+    overflow:hidden;
+}
+
+.section{
+    display:none;
+    height:100vh;
+    width:100%;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:40px;
+    animation:fade 0.8s ease;
+}
+
+h1,h2{
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+button{
+    padding:12px 26px;
+    border:none;
+    border-radius:4px;
+    background:#1f1f1f;
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    border:1px solid #444;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#333;
+}
+
+.letter{
+    font-family:'Playfair Display', serif;
+    font-size:20px;
+    max-width:700px;
+    line-height:1.6;
+}
+
+.image{
+    width:280px;
+    max-width:90%;
+    margin-top:20px;
+}
+
+.big{
+    font-size:70px;
+    font-family:'Playfair Display', serif;
+}
+
+.nowplaying{
+    position:absolute;
+    bottom:20px;
+    font-size:14px;
+    opacity:0.7;
+}
+
+@keyframes fade{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+</style>
+</head>
+<body>
+
+<audio id="bgmusic" src="music.mp3"></audio>
+
+<!-- GATE -->
+<div id="gate" class="section" style="display:flex;">
+    <h1>You can only open this link if you love Ayokunmi</h1>
+    <button onclick="next('q1')">Continue</button>
+</div>
+
+<!-- QUESTIONS -->
+<div id="q1" class="section">
+    <h2>Do you love me?</h2>
+    <button onclick="next('q2')">Yes</button>
+</div>
+
+<div id="q2" class="section">
+    <h2>Are you sure you love me?</h2>
+    <button onclick="next('q3')">Yes</button>
+</div>
+
+<div id="q3" class="section">
+    <h2>Like truly sure you love me?</h2>
+    <button onclick="next('q4')">Yes</button>
+</div>
+
+<div id="q4" class="section">
+    <h2>You won’t change your mind about loving me?</h2>
+    <button onclick="next('q5')">Yes</button>
+</div>
+
+<div id="q5" class="section">
+    <h2>Final answer… you love me?</h2>
+    <button onclick="startLetter()">Yes</button>
+</div>
+
+<!-- LETTER -->
+<div id="letter" class="section">
+    <div class="letter">
+        Hiiii Fikayomi 🫀🥹💕🌚<br><br>
+        I was bored so I just thought I should let you know how special you are to me.  
+        I really love you and I’m so glad that you’re in my life.  
+        Our love story started on Thursday 15 of January.  
+        I never knew just a “hi” could begin our love story and make me love you this much.
+    </div>
+    <div class="nowplaying">Now Playing…</div>
+    <button onclick="next('screenshot')" style="margin-top:30px;">Continue</button>
+</div>
+
+<!-- SCREENSHOT -->
+<div id="screenshot" class="section">
+    <img src="screenshot.jpg" class="image">
+    <button onclick="next('burst')" style="margin-top:30px;">Continue</button>
+</div>
+
+<!-- BURST BUTTON -->
+<div id="burst" class="section">
+    <button onclick="next('memories')">Burst your head Abi?</button>
+</div>
+
+<!-- MEMORY BUTTON -->
+<div id="memories" class="section">
+    <button onclick="showPhoto()">Wanna see more memories?</button>
+</div>
+
+<!-- PHOTO SLIDES -->
+<div id="photos" class="section">
+    <img id="memoryImg" class="image">
+    <button onclick="showPhoto()" style="margin-top:20px;">Next</button>
+</div>
+
+<!-- FINAL -->
+<div id="final" class="section">
+    <div class="big">I love you.</div>
+</div>
+
+<script>
+
+let photos=["photo1.jpg","photo2.jpg","photo3.jpg"];
+let index=0;
+
+function hideAll(){
+    let sections=document.getElementsByClassName("section");
+    for(let i=0;i<sections.length;i++){
+        sections[i].style.display="none";
+    }
+}
+
+function next(id){
+    hideAll();
+    document.getElementById(id).style.display="flex";
+}
+
+function startLetter(){
+    hideAll();
+    document.getElementById("letter").style.display="flex";
+    document.getElementById("bgmusic").play();
+}
+
+function showPhoto(){
+    if(index < photos.length){
+        hideAll();
+        document.getElementById("photos").style.display="flex";
+        document.getElementById("memoryImg").src=photos[index];
+        index++;
+    } else {
+        hideAll();
+        document.getElementById("final").style.display="flex";
+    }
+}
+
+</script>
+
+</body>
+</html>
